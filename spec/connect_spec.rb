@@ -5,8 +5,6 @@ describe ActBlueReporter do
   describe ActBlueReporter::Connect do
 
     let(:act_blue_connect) { ActBlueReporter::Connect.new }
-    let(:request_url) { }
-    let(:request_auth) { }
 
     describe 'class constants' do
       it 'should have a constant for the ActBlue URI' do
