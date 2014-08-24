@@ -12,10 +12,6 @@ module ActBlueReporter
     ACTBLUE_URI = "https://secure.actblue.com/api/2009-08"
     HEADER = { "Accept" => "application/xml" }
 
-    # all children of this class get a success and msg attribute
-    attr_accessor :success
-    attr_accessor :message
-
     private
       def make_request(request_url, authentication)
 
