@@ -18,17 +18,13 @@ module ActBlueReporter
         response = request_wrapper(request_uri, authentication)
 
         # response can be nil if the act blue entity id is blank
-        unless response
-          raise ActBlueReporter::Exceptions::ConnectionError.new(
-                    msg: "No response. Check the ActBlue entity ID.")
-        end
+        raise_error("No response. Check the ActBlue entity ID.") unless response
 
         # if the response is successful then return the parsed data as a hash.
         if response.success?
           return response.parsed_response
         else
-          raise ActBlueReporter::Exceptions::ConnectionError.new(
-                    msg: "HTTP response code: #{response.response.code}")
+          raise_error("HTTP response code: #{response.response.code}")
         end
       end
 
@@ -38,6 +34,10 @@ module ActBlueReporter
                                   basic_auth: authentication,
                                   headers: HEADER)
         end
+      end
+
+      def raise_error(message)
+        raise ActBlueReporter::Exceptions::ConnectionError.new(msg: message)
       end
   end
 end
