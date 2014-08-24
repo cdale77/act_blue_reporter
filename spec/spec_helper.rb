@@ -1,4 +1,4 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 require "pry"
-require "ActBlueReporter"
+require "act_blue_reporter"
