@@ -16,27 +16,27 @@ module ActBlueReporter
     attr_accessor :success
     attr_accessor :message
 
-    def initialize
+    def initialize(act_blue_login, act_blue_password, act_blue_entity_id)
       @message = ""
       @success = false
     end
 
     private
-    def make_request(request_url, authentication)
+      def make_request(request_url, authentication)
 
-      # pre-create the response as an empty string
-      response = ""
+        # pre-create the response as an empty string
+        response = ""
 
-      # attempt to connect to ActBlue
-      Timeout.timeout(5) do
-        response = HTTParty.get("#{ACTBLUE_URI}#{request_url}",
-                                basic_auth: authentication,
-                                headers: HEADER)
+        # attempt to connect to ActBlue
+        Timeout.timeout(5) do
+          response = HTTParty.get("#{ACTBLUE_URI}#{request_url}",
+                                  basic_auth: authentication,
+                                  headers: HEADER)
+        end
+
+        # Parsed response is nil when an incorrect entity id is used
+        response.parsed_response ? response.parsed_response : ""
       end
-
-      # Parsed response is nil when an incorrect entity id is used
-      response.parsed_response ? response.parsed_response : ""
-    end
 
   end
 end

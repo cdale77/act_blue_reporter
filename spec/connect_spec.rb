@@ -4,7 +4,7 @@ describe ActBlueReporter do
 
   describe ActBlueReporter::Connect do
 
-    let(:act_blue_connect) { ActBlueReporter::Connect.new }
+    let(:act_blue_connect) { ActBlueReporter::Connect.new("", "", "") }
 
     describe 'class constants' do
       it 'should have a constant for the ActBlue URI' do
