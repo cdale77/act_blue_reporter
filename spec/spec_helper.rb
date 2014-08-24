@@ -12,6 +12,8 @@ RSpec.configure do |config|
 
   # stub out HTTP requests
   config.before(:each) do
+
+    # successful entities request
     stub_request(:get, "https://secure.actblue.com/api/2009-08/entities/").
         with(headers: { "Accept" => "application/xml" }).
         to_return(status: 200,
@@ -23,6 +25,19 @@ RSpec.configure do |config|
                       "Status" => "200 OK"
                           }
                   )
+
+    # failing entities request
+    stub_request(:get, "https://secure.actblue.com/api/2009-08/entities/0").
+        with(headers: { "Accept" => "application/xml" }).
+        to_return(status: 404,
+                  body: "",
+                  headers: {
+                      "Date" => "Sun, 24 Aug 2014 20:02:46 GMT",
+                      "Server" => "Apache",
+                      "Content-Type" => "application/xml; charset=utf-8",
+                      "Status" => "404 Not Found"
+                  }
+    )
 
   end
 end

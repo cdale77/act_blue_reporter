@@ -19,5 +19,16 @@ module ActBlueReporter
       response["entity"] ? response["entity"] : false
     end
 
+    def all_contributions
+      response = make_request("/contributions?destination=#{@entity.to_s}",
+                              @auth)
+
+      # if successful, we will have a contributions hash.
+      # if response["contributions"]
+      #   response["contributions"]
+      # else
+      #   (raise ActBlueReporterContributionsError.new(msg: error_message))
+      # end
+    end
   end
 end

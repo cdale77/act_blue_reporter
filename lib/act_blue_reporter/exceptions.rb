@@ -1,8 +1,11 @@
 module ActBlueReporter
   module Exceptions
     # Custom exceptions
-    class ActBlueConnectionError < StandardError; end
-    class ActBlueAccountError < StandardError; end
-    class ActBlueReportError < StandardError; end
+    class ConnectionError < StandardError
+      def initialize(msg = "Error while connecting to ActBlue.")
+        super
+      end
+    end
+
   end
 end

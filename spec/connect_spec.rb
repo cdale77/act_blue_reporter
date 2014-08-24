@@ -17,11 +17,5 @@ describe ActBlueReporter do
         "application/xml"
       end
     end
-
-    describe '#initialize' do
-      it 'should create an object' do
-        expect(act_blue_connect).to be_an_instance_of ActBlueReporter::Connect
-      end
-    end
   end
 end

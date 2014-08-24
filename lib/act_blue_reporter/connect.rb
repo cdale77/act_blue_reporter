@@ -13,21 +13,31 @@ module ActBlueReporter
     HEADER = { "Accept" => "application/xml" }
 
     private
-      def make_request(request_url, authentication)
+      def make_request(request_uri, authentication)
 
-        # pre-create the response as an empty string
-        response = ""
+        response = request_wrapper(request_uri, authentication)
 
-        # attempt to connect to ActBlue
+        # response can be nil if the act blue entity id is blank
+        unless response
+          raise ActBlueReporter::Exceptions::ConnectionError.new(
+                    msg: "No response. Check the ActBlue entity ID.")
+        end
+
+        # if the response is successful then return the parsed data as a hash.
+        if response.success?
+          return response.parsed_response
+        else
+          raise ActBlueReporter::Exceptions::ConnectionError.new(
+                    msg: "HTTP response code: #{response.response.code}")
+        end
+      end
+
+      def request_wrapper(request_uri, authentication)
         Timeout.timeout(5) do
-          response = HTTParty.get("#{ACTBLUE_URI}#{request_url}",
+          HTTParty.get("#{ACTBLUE_URI}#{request_uri}",
                                   basic_auth: authentication,
                                   headers: HEADER)
         end
-
-        # Parsed response is nil when an incorrect entity id is used
-        response.parsed_response ? response.parsed_response : ""
       end
-
   end
 end

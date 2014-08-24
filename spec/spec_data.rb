@@ -7,7 +7,7 @@ module SpecData
       <prefacewitharticle>false</prefacewitharticle>
       <sortname>test committee</sortname>
       <kind>org</kind>
-      <govid>C00231076</govid>
+      <govid>A00000000</govid>
       <contributionlimit>5000.00</contributionlimit>
       <links>
         <link>https://secure.actblue.com/entity/fundraisers/00000</link>
