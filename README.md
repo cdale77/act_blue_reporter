@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/gpa.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
+[![Code Climate](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/gpa.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
+
 # ActBlueReporter
 
 This is a Ruby gem designed to simplify getting contribution information from
