@@ -8,7 +8,7 @@ describe ActBlueReporter do
 
     describe '#details' do
       it 'should return something' do
-        expect(campaign.details).to eq "d"
+        expect(campaign.details).to be_an_instance_of Hash
       end
     end
 
