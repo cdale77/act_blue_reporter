@@ -1,5 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/gpa.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
-[![Code Climate](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/gpa.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
+[![Test Coverage](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/coverage.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
 
 # ActBlueReporter
 
