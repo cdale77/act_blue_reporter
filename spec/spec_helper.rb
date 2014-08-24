@@ -6,6 +6,7 @@ require "spec_data"
 require "webmock/rspec"
 WebMock.disable_net_connect!(allow_localhost: true, allow: "codeclimate.com")
 
+
 RSpec.configure do |config|
   #include the custom data file
   config.include SpecData
@@ -14,7 +15,8 @@ RSpec.configure do |config|
   config.before(:each) do
 
     # successful entities request
-    stub_request(:get, "https://secure.actblue.com/api/2009-08/entities/").
+    stub_request(:get,
+        "https://secure.actblue.com/api/2009-08/entities/").
         with(headers: { "Accept" => "application/xml" }).
         to_return(status: 200,
                   body: "#{SpecData.act_blue_entity_response_xml}",
@@ -27,7 +29,8 @@ RSpec.configure do |config|
                   )
 
     # failing entities request
-    stub_request(:get, "https://secure.actblue.com/api/2009-08/entities/0").
+    stub_request(:get,
+        "https://secure.actblue.com/api/2009-08/entities/0").
         with(headers: { "Accept" => "application/xml" }).
         to_return(status: 404,
                   body: "",
@@ -38,6 +41,19 @@ RSpec.configure do |config|
                       "Status" => "404 Not Found"
                   }
     )
+
+    # all contributions request
+    stub_request(:get,
+        "https://secure.actblue.com/api/2009-08/contributions?destination=").
+        with(headers: {'Accept'=>'application/xml'}).
+        to_return(status: 200,
+                  body: "",
+                  headers: {
+                      "Date" => "Sun, 24 Aug 2014 20:02:46 GMT",
+                      "Server" => "Apache",
+                      "Content-Type" => "application/xml; charset=utf-8",
+                      "Status" => "200 OK"
+    })
 
   end
 end

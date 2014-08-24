@@ -7,5 +7,10 @@ module ActBlueReporter
       end
     end
 
+    class PayloadError < StandardError
+      def initialize(msg = "Did not receive the requested data from ActBlue")
+        super
+      end
+    end
   end
 end

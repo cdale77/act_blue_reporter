@@ -5,7 +5,7 @@ describe ActBlueReporter::Campaign do
   let!(:campaign) { ActBlueReporter::Campaign.new("", "", "") }
   let!(:failing_campaign) { ActBlueReporter::Campaign.new("", "", "0") }
   let!(:details_response) { campaign.details }
-  #let!(:all_contributions_response) { campaign.all_contributions }
+  let!(:all_contributions_response) { campaign.all_contributions }
 
   describe '#initialize' do
     it 'should create an object' do
@@ -30,7 +30,6 @@ describe ActBlueReporter::Campaign do
     end
   end
 
-=begin
     describe '#all_contributions' do
       describe 'success' do
         it 'should return a Hash' do
@@ -38,10 +37,9 @@ describe ActBlueReporter::Campaign do
         end
       end
       describe 'failure' do
-        it 'should return false' do
-          expect(failing_campaign.all_contributions).to raise_error
+        it 'should raise an error' do
+          expect{failing_campaign.all_contributions}.to raise_error
         end
       end
     end
-=end
 end

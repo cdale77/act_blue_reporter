@@ -7,28 +7,22 @@ module ActBlueReporter
     attr_reader :act_blue_entity_id
 
     def initialize(act_blue_login, act_blue_password, act_blue_entity_id)
-      @auth = { username: act_blue_login,
-                password: act_blue_password }
+      @auth = { username: act_blue_login, password: act_blue_password }
       @act_blue_entity_id = act_blue_entity_id
     end
 
     def details
-      response = make_request("/entities/#{@act_blue_entity_id.to_s}", @auth)
-
-      # if successful, we will have an entity hash, if not return false.
-      response["entity"] ? response["entity"] : false
+      request_uri = "/entities/#{@act_blue_entity_id}"
+      response = make_request(request_uri, @auth)
+      payload = response["entity"]
+      raise ActBlueReporter::Exceptions::PayloadError unless payload
     end
 
     def all_contributions
-      response = make_request("/contributions?destination=#{@entity.to_s}",
-                              @auth)
-
-      # if successful, we will have a contributions hash.
-      # if response["contributions"]
-      #   response["contributions"]
-      # else
-      #   (raise ActBlueReporterContributionsError.new(msg: error_message))
-      # end
+      request_uri = "/contributions?destination=#{@act_blue_entity_id}"
+      response = make_request(request_uri, @auth)
+      payload = response["contributions"]
+      raise ActBlueReporter::Exceptions::PayloadError unless payload
     end
   end
 end
