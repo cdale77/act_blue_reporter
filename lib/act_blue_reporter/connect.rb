@@ -16,11 +16,6 @@ module ActBlueReporter
     attr_accessor :success
     attr_accessor :message
 
-    def initialize(act_blue_login, act_blue_password, act_blue_entity_id)
-      @message = ""
-      @success = false
-    end
-
     private
       def make_request(request_url, authentication)
 
