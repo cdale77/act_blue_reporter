@@ -4,7 +4,7 @@ require "pry"
 require "act_blue_reporter"
 require "spec_data"
 require "webmock/rspec"
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true, allow: "codeclimate.com")
 
 RSpec.configure do |config|
   #include the custom data file
