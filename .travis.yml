@@ -1,14 +1,14 @@
 language: ruby
 cache: bundler
-
 rvm:
-  - 2.1.1
-
-script: 'bundle exec rake'
-
+- 2.1.2
+script: bundle exec rake
 notifications:
   email:
     recipients:
-      - cdale77@gmail.com
+    - cdale77@gmail.com
     on_failure: change
     on_success: never
+env:
+  global:
+    secure: STGu7bKcpOa1PiEuSsiiq+3X7n7qzBnKdrSqZGT8EGu3T+ZwMsba/XwffD2ABa3xHkeSm/08Jwg29mLBiN1BQALsQZ7T88pe0AvzEUAW5KG1Q7Ns4TnHmMMJYGAibq29CrDZttJmQzM3Ancu5k3gN/fO3cjk6qJsRiqpyTFd6ho=
