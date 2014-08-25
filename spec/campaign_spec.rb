@@ -4,8 +4,6 @@ describe ActBlueReporter::Campaign do
 
   let!(:campaign) { ActBlueReporter::Campaign.new("", "", "") }
   let!(:failing_campaign) { ActBlueReporter::Campaign.new("", "", "0") }
-  let!(:details_response) { campaign.details }
-  let!(:all_contributions_response) { campaign.all_contributions }
 
   describe '#initialize' do
     it 'should create an object' do
@@ -16,11 +14,11 @@ describe ActBlueReporter::Campaign do
   describe '#details' do
     describe 'success' do
       it 'should return a Hash' do
-        expect(details_response).to be_an_instance_of Hash
+        expect(campaign.details).to be_an_instance_of Hash
       end
       it 'should return a response with the correct info' do
-        expect(details_response["id"]).to eql "00000"
-        expect(details_response["displayname"]).to eql "Test Committee"
+        expect(campaign.details["id"]).to eql "00000"
+        expect(campaign.details["displayname"]).to eql "Test Committee"
       end
     end
     describe 'failure' do
@@ -33,11 +31,11 @@ describe ActBlueReporter::Campaign do
   describe '#all_contributions' do
     describe 'success' do
       it 'should return a Hash' do
-        expect(all_contributions_response).to be_an_instance_of Hash
+        expect(campaign.all_contributions).to be_an_instance_of Hash
       end
     end
     it 'should return a response with the correct info' do
-      expect(all_contributions_response["count"]).to eq "3"
+      expect(campaign.all_contributions["count"]).to eq "3"
     end
     describe 'failure' do
       it 'should raise an error' do
@@ -45,4 +43,22 @@ describe ActBlueReporter::Campaign do
       end
     end
   end
+
+=begin
+  describe '#contributions_in_date_range' do
+    describe 'success' do
+      let(:response) { act_blue_campaign.contributions_in_date_range(  (Time.now.at_beginning_of_day - 24.hours).iso8601,
+                                                                       (Time.now.at_beginning_of_day.iso8601)) }
+      it 'should return a Hash' do
+        response.should be_an_instance_of Hash
+      end
+    end
+    describe 'failure' do
+      it 'should raise an exception' do
+        expect { bad_act_blue_campaign.contributions_in_date_range(  (Time.now.at_beginning_of_day - 24.hours).iso8601,
+                                                                     (Time.now.at_beginning_of_day.iso8601)) }.to raise_error
+      end
+    end
+  end
+=end
 end
