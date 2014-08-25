@@ -39,21 +39,22 @@ RSpec.configure do |config|
                       "Server" => "Apache",
                       "Content-Type" => "application/xml; charset=utf-8",
                       "Status" => "404 Not Found"
-                  }
-    )
+                          }
+                  )
 
     # all contributions request
     stub_request(:get,
         "https://secure.actblue.com/api/2009-08/contributions?destination=").
         with(headers: {'Accept'=>'application/xml'}).
         to_return(status: 200,
-                  body: "",
+                  body: "#{SpecData.act_blue_contributions_response_xml}",
                   headers: {
                       "Date" => "Sun, 24 Aug 2014 20:02:46 GMT",
                       "Server" => "Apache",
                       "Content-Type" => "application/xml; charset=utf-8",
                       "Status" => "200 OK"
-    })
+                          }
+                  )
 
   end
 end

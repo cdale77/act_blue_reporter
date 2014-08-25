@@ -53,6 +53,5 @@ module ActBlueReporter
       def raise_error(message)
         raise ActBlueReporter::Exceptions::ConnectionError.new(msg: message)
       end
-
   end
 end

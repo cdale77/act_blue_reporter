@@ -16,6 +16,7 @@ module ActBlueReporter
       response = make_request(request_uri, @auth)
       payload = response["entity"]
       raise ActBlueReporter::Exceptions::PayloadError unless payload
+      return payload
     end
 
     def all_contributions
@@ -23,6 +24,7 @@ module ActBlueReporter
       response = make_request(request_uri, @auth)
       payload = response["contributions"]
       raise ActBlueReporter::Exceptions::PayloadError unless payload
+      return payload
     end
   end
 end
