@@ -30,16 +30,19 @@ describe ActBlueReporter::Campaign do
     end
   end
 
-    describe '#all_contributions' do
-      describe 'success' do
-        it 'should return a Hash' do
-          expect(all_contributions_response).to be_an_instance_of Hash
-        end
-      end
-      describe 'failure' do
-        it 'should raise an error' do
-          expect{failing_campaign.all_contributions}.to raise_error
-        end
+  describe '#all_contributions' do
+    describe 'success' do
+      it 'should return a Hash' do
+        expect(all_contributions_response).to be_an_instance_of Hash
       end
     end
+    it 'should return a response with the correct info' do
+      expect(all_contributions_response["count"]).to eq "3"
+    end
+    describe 'failure' do
+      it 'should raise an error' do
+        expect{failing_campaign.all_contributions}.to raise_error
+      end
+    end
+  end
 end
