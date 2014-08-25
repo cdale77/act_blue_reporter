@@ -23,7 +23,7 @@ describe ActBlueReporter::Campaign do
     end
     describe 'failure' do
       it 'should raise an error' do
-        expect {failing_campaign.details}.to raise_error
+        expect { failing_campaign.details }.to raise_error
       end
     end
   end
@@ -39,26 +39,25 @@ describe ActBlueReporter::Campaign do
     end
     describe 'failure' do
       it 'should raise an error' do
-        expect{failing_campaign.all_contributions}.to raise_error
+        expect { failing_campaign.all_contributions }.to raise_error
       end
     end
   end
 
-=begin
-  describe '#contributions_in_date_range' do
+  describe '#contributions_in_time_range' do
     describe 'success' do
-      let(:response) { act_blue_campaign.contributions_in_date_range(  (Time.now.at_beginning_of_day - 24.hours).iso8601,
-                                                                       (Time.now.at_beginning_of_day.iso8601)) }
-      it 'should return a Hash' do
-        response.should be_an_instance_of Hash
+      start_time = "2014-08-23T00:00:00-07:00"
+      end_time = "2014-08-24T00:00:00-07:00"
+      describe 'success' do
+        it 'should return a Hash' do
+          expect(campaign.contributions_in_time_range(start_time, end_time)).to \
+          be_an_instance_of Hash
+        end
       end
     end
     describe 'failure' do
-      it 'should raise an exception' do
-        expect { bad_act_blue_campaign.contributions_in_date_range(  (Time.now.at_beginning_of_day - 24.hours).iso8601,
-                                                                     (Time.now.at_beginning_of_day.iso8601)) }.to raise_error
-      end
+
     end
   end
-=end
+
 end

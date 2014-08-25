@@ -1,5 +1,7 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
+require "active_support"
+require "active_support/core_ext/time/calculations"
 require "pry"
 require "act_blue_reporter"
 require "spec_data"
@@ -45,6 +47,20 @@ RSpec.configure do |config|
     # all contributions request
     stub_request(:get,
         "https://secure.actblue.com/api/2009-08/contributions?destination=").
+        with(headers: {'Accept'=>'application/xml'}).
+        to_return(status: 200,
+                  body: "#{SpecData.act_blue_contributions_response_xml}",
+                  headers: {
+                      "Date" => "Sun, 24 Aug 2014 20:02:46 GMT",
+                      "Server" => "Apache",
+                      "Content-Type" => "application/xml; charset=utf-8",
+                      "Status" => "200 OK"
+                          }
+                  )
+
+    # contributions in date range request
+    stub_request(:get,
+        "https://secure.actblue.com/api/2009-08/contributions?destination=&payment_timestamp=2014-08-23T00:00:00-07:00/2014-08-24T00:00:00-07:00").
         with(headers: {'Accept'=>'application/xml'}).
         to_return(status: 200,
                   body: "#{SpecData.act_blue_contributions_response_xml}",

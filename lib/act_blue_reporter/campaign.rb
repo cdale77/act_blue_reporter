@@ -26,5 +26,15 @@ module ActBlueReporter
       raise ActBlueReporter::Exceptions::PayloadError unless payload
       return payload
     end
+
+    def contributions_in_time_range(start_time, end_time)
+      response = make_request( "/contributions?destination=#{@entity.to_s}&" \
+                              "payment_timestamp=#{start_time.to_s}/" \
+                              "#{end_time.to_s}",
+                               @auth)
+      payload = response["contributions"]
+      raise ActBlueReporter::Exceptions::PayloadError unless payload
+      return payload
+    end
   end
 end
