@@ -53,6 +53,24 @@ describe ActBlueReporter::Campaign do
           expect(campaign.contributions_in_time_range(start_time, end_time)).to \
           be_an_instance_of Hash
         end
+        it 'should return a response with the correct info' do
+          expect(campaign.contributions_in_time_range(start_time, end_time)["count"]).to \
+            eq "3"
+        end
+      end
+    end
+    describe 'failure' do
+      it 'should raise an error' do
+        expect { failing_campaign.contributions_in_time_range(start_time, end_time) }.to \
+          raise_error
+      end
+    end
+  end
+
+  describe '#contributions_in_last_24_hrs' do
+    describe 'success' do
+      it 'should return a Hash' do
+        expect(campaign.contributions_in_last_24_hrs).to be_an_instance_of Hash
       end
     end
     describe 'failure' do
