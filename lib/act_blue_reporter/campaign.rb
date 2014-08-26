@@ -41,7 +41,9 @@ module ActBlueReporter
     def contributions_in_last_24_hrs
       start_time = (Time.now.at_beginning_of_day - 24.hours).iso8601
       end_time = Time.now.at_beginning_of_day.iso8601
-      contributions_in_time_range(start_time, end_time)
+      payload = contributions_in_time_range(start_time, end_time)
+      raise ActBlueReporter::Exceptions::PayloadError unless payload
+      return payload
     end
   end
 end

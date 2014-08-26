@@ -61,8 +61,9 @@ describe ActBlueReporter::Campaign do
     end
     describe 'failure' do
       it 'should raise an error' do
-        expect { failing_campaign.contributions_in_time_range(start_time, end_time) }.to \
-          raise_error
+        expect do
+          failing_campaign.contributions_in_time_range(start_time, end_time)
+        end.to raise_error
       end
     end
   end
@@ -73,9 +74,5 @@ describe ActBlueReporter::Campaign do
         expect(campaign.contributions_in_last_24_hrs).to be_an_instance_of Hash
       end
     end
-    describe 'failure' do
-
-    end
   end
-
 end
