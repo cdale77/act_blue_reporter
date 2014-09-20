@@ -10,6 +10,8 @@ ActBlue. It is designed to work across multiple ActBlue campaigns.
 It is not a full-fledged wrapper for the ActBlue API; it doesn't do much more
 than retrieve data. 
 
+Extracted from [DonorStack](http://donorstack.com/).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -26,7 +28,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a campaign object. The login and password are the same as you use for
+the web interface. The entity ID can be obtain from the web interface. It is
+usually visible in the url. 
+
+    campaign = ActBlueReporter::Campaign.new(act_blue_login, 
+                                             act_blue_password, 
+                                             act_blue_entity_id)
+                                  
+You can use the campaign object to get data
+  
+    # returns a hash of campaign details. Useful for checking credentials.
+    campaign.details
+    
+    # returns a hash of all the campaign's contributions. Use with care. 
+    campaign.all_contributions
+    
+    # returns the contributions in the last 24 hours
+    campaign.contributions_in_last_24_hours
+    
+    # returns contributions in a certain time range. Arguments must be
+    # ISO 8601 formatted strings. 
+    contributions_in_time_range(start_time, end_time)
+    
+One of the problems with ActBlue's API is the structure of the response is 
+different if there is one contribution, or more than one. In particular, 
+responses containing multiple contributions are nested on level more than 
+single contributions. This class abstracts that away and returns a predictable 
+structure. 
+
+    payload = campaign.all_contributions
+    formatter = ActBlueReporter::ContributionReport.new(payload)
+    report = formatter.report
+    
+    # you can also get the count of contributions from the formatter object
+    formatter.count
+    
 
 ## Contributing
 
