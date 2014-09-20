@@ -15,35 +15,27 @@ module ActBlueReporter
     def details
       request_uri = "/entities/#{@act_blue_entity_id}"
       response = make_request(request_uri, @auth)
-      payload = response["entity"]
-      raise ActBlueReporter::Exceptions::PayloadError unless payload
-      return payload
+      response["entity"]
     end
 
     def all_contributions
       request_uri = "/contributions?destination=#{@act_blue_entity_id}"
       response = make_request(request_uri, @auth)
-      payload = response["contributions"]
-      raise ActBlueReporter::Exceptions::PayloadError unless payload
-      return payload
+      response["contributions"]
     end
 
     def contributions_in_time_range(start_time, end_time)
-      response = make_request( "/contributions?destination=#{@entity.to_s}&" \
-                              "payment_timestamp=#{start_time.to_s}/" \
-                              "#{end_time.to_s}",
-                               @auth)
-      payload = response["contributions"]
-      raise ActBlueReporter::Exceptions::PayloadError unless payload
-      return payload
+      request_uri = "/contributions?destination=#{@entity.to_s}&" +
+                    "payment_timestamp=#{start_time.to_s}/" +
+                    "#{end_time.to_s}"
+      response = make_request(request_uri, @auth)
+      response["contributions"]
     end
 
     def contributions_in_last_24_hrs
       start_time = (Time.now.at_beginning_of_day - 24.hours).iso8601
       end_time = Time.now.at_beginning_of_day.iso8601
-      payload = contributions_in_time_range(start_time, end_time)
-      raise ActBlueReporter::Exceptions::PayloadError unless payload
-      return payload
+      contributions_in_time_range(start_time, end_time)
     end
   end
 end

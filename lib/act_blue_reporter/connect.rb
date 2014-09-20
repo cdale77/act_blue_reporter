@@ -47,6 +47,11 @@ module ActBlueReporter
         unless response.success?
           raise_error("HTTP response code: #{response.response.code}")
         end
+
+        # raise an error if the response is not a hash
+        unless response.is_a? Hash
+          raise_error("Response is a #{response.class}. Expecting hash")
+        end
       end
 
 
