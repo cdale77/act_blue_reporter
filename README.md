@@ -1,6 +1,7 @@
 [![Code Climate](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/gpa.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
 [![Test Coverage](https://codeclimate.com/github/cdale77/act_blue_reporter/badges/coverage.svg)](https://codeclimate.com/github/cdale77/act_blue_reporter)
 [![Build Status](https://travis-ci.org/cdale77/act_blue_reporter.svg?branch=master)](https://travis-ci.org/cdale77/act_blue_reporter)
+[![Gem Version](https://badge.fury.io/rb/act_blue_reporter.svg)](http://badge.fury.io/rb/act_blue_reporter)
 
 # ActBlueReporter
 
