@@ -51,7 +51,7 @@ You can use the campaign object to get data.
     # ISO 8601 formatted strings. 
     campaign.contributions_in_time_range(start_time, end_time)
     
-The structure of the response is 
+The structure of the response from ActBlue is 
 different if there is one contribution, or more than one. In particular, 
 responses containing multiple contributions are nested one level more than 
 single contributions. This class abstracts that away and returns a predictable 
