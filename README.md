@@ -49,7 +49,7 @@ You can use the campaign object to get data.
     
     # returns contributions in a certain time range. Arguments must be
     # ISO 8601 formatted strings. 
-    contributions_in_time_range(start_time, end_time)
+    campaign.contributions_in_time_range(start_time, end_time)
     
 The structure of the response is 
 different if there is one contribution, or more than one. In particular, 
