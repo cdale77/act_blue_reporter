@@ -13,7 +13,7 @@ module ActBlueReporter
     HEADER = { "Accept" => "application/xml" }
 
     private
-      def make_request(request_uri, authentication)
+      def make_request(request_uri:, authentication:)
 
         response = request_wrapper(request_uri, authentication)
 

@@ -14,13 +14,13 @@ module ActBlueReporter
 
     def details
       request_uri = "/entities/#{@act_blue_entity_id}"
-      response = make_request(request_uri, @auth)
+      response = make_request(request_uri: request_uri, authentication: @auth)
       response["entity"]
     end
 
     def all_contributions
       request_uri = "/contributions?destination=#{@act_blue_entity_id}"
-      response = make_request(request_uri, @auth)
+      response = make_request(request_uri: request_uri, authentication: @auth)
       response["contributions"]
     end
 
@@ -30,11 +30,11 @@ module ActBlueReporter
       request_uri = "/contributions?destination=#{@entity.to_s}&" +
                     "payment_timestamp=#{start_time.to_s}/" +
                     "#{end_time.to_s}"
-      response = make_request(request_uri, @auth)
+      response = make_request(request_uri: request_uri, authentication: @auth)
       response["contributions"]
     end
 
-    # Mostly for syntax
+    # Mostly for syntax and clarity
     def contributions_in_last_24_hrs
       contributions_in_time_range()
     end

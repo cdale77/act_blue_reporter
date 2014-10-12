@@ -6,7 +6,7 @@ describe ActBlueReporter::ContributionReport do
                                                   act_blue_password: "", 
                                                   act_blue_entity_id: "") }
   let!(:payload) { campaign.contributions_in_last_24_hrs }
-  let!(:report) { ActBlueReporter::ContributionReport.new(payload) }
+  let!(:report) { ActBlueReporter::ContributionReport.new(payload: payload) }
 
   describe '#initialize' do
     it 'should create an object' do

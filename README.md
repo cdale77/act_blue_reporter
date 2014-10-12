@@ -61,7 +61,7 @@ single contributions. This class abstracts that away and returns a predictable
 structure. 
 
     payload = campaign.all_contributions
-    formatter = ActBlueReporter::ContributionReport.new(payload)
+    formatter = ActBlueReporter::ContributionReport.new(payload: my_payload)
     report = formatter.report
     
     # you can also get the count of contributions from the formatter object
