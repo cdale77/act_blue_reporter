@@ -2,8 +2,13 @@ require "spec_helper"
 
 describe ActBlueReporter::Campaign do
 
-  let!(:campaign) { ActBlueReporter::Campaign.new("", "", "") }
-  let!(:failing_campaign) { ActBlueReporter::Campaign.new("", "", "0") }
+  let!(:campaign) { ActBlueReporter::Campaign.new(act_blue_login: "", 
+                                                  act_blue_password: "", 
+                                                  act_blue_entity_id: "") }
+
+  let!(:failing_campaign) { ActBlueReporter::Campaign.new(act_blue_login: "", 
+                                                          act_blue_password: "", 
+                                                          act_blue_entity_id: 0) }
 
   describe '#initialize' do
     it 'should create an object' do
@@ -50,19 +55,21 @@ describe ActBlueReporter::Campaign do
       end_time = "2014-08-24T00:00:00-07:00"
       describe 'success' do
         it 'should return a Hash' do
-          expect(campaign.contributions_in_time_range(start_time, end_time)).to \
-          be_an_instance_of Hash
+          result = campaign.contributions_in_time_range(start_time: start_time, end_time: end_time)
+          expect(result).to be_an_instance_of Hash
         end
         it 'should return a response with the correct info' do
-          expect(campaign.contributions_in_time_range(start_time, end_time)["count"]).to \
-            eq "3"
+          result = campaign.contributions_in_time_range(start_time: start_time, end_time: end_time)
+          expect(result["count"]).to eq "3"
         end
       end
     end
     describe 'failure' do
+      tart_time = "2014-08-23T00:00:00-07:00"
+      end_time = "2014-08-24T00:00:00-07:00"
       it 'should raise an error' do
         expect do
-          failing_campaign.contributions_in_time_range(start_time, end_time)
+          failing_campaign.contributions_in_time_range(start_time: start_time, end_time: end_time)
         end.to raise_error
       end
     end

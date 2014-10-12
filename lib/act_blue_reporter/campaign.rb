@@ -7,7 +7,7 @@ module ActBlueReporter
     # This class models a campaign or committee at ActBlue and provides
     # some basic functionality. ActBlue calls these "entities".
 
-    def initialize(act_blue_login, act_blue_password, act_blue_entity_id)
+    def initialize(act_blue_login:, act_blue_password:, act_blue_entity_id: )
       @auth = { username: act_blue_login, password: act_blue_password }
       @act_blue_entity_id = act_blue_entity_id
     end
@@ -24,7 +24,9 @@ module ActBlueReporter
       response["contributions"]
     end
 
-    def contributions_in_time_range(start_time, end_time)
+    # Defaults to the last 24 hours if no arguments are supplied
+    def contributions_in_time_range(start_time: (Time.now.at_beginning_of_day - 24.hours).iso8601, 
+                                    end_time: Time.now.at_beginning_of_day.iso8601)
       request_uri = "/contributions?destination=#{@entity.to_s}&" +
                     "payment_timestamp=#{start_time.to_s}/" +
                     "#{end_time.to_s}"
@@ -32,10 +34,9 @@ module ActBlueReporter
       response["contributions"]
     end
 
+    # Mostly for syntax
     def contributions_in_last_24_hrs
-      start_time = (Time.now.at_beginning_of_day - 24.hours).iso8601
-      end_time = Time.now.at_beginning_of_day.iso8601
-      contributions_in_time_range(start_time, end_time)
+      contributions_in_time_range()
     end
   end
 end

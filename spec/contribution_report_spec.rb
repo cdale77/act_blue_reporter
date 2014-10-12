@@ -2,7 +2,9 @@ require "spec_helper"
 
 describe ActBlueReporter::ContributionReport do
 
-  let!(:campaign) { ActBlueReporter::Campaign.new("", "", "") }
+  let!(:campaign) { ActBlueReporter::Campaign.new(act_blue_login: "", 
+                                                  act_blue_password: "", 
+                                                  act_blue_entity_id: "") }
   let!(:payload) { campaign.contributions_in_last_24_hrs }
   let!(:report) { ActBlueReporter::ContributionReport.new(payload) }
 

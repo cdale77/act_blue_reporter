@@ -31,11 +31,11 @@ Or install it yourself as:
 
 Create a campaign object. The login and password are the same as you use for
 the web interface. The entity ID can be obtained from the web interface. It is
-usually visible in the url. 
+usually visible in the url. All three arguments are required.
 
-    campaign = ActBlueReporter::Campaign.new(act_blue_login, 
-                                             act_blue_password, 
-                                             act_blue_entity_id)
+    campaign = ActBlueReporter::Campaign.new(act_blue_login: my_login, 
+                                             act_blue_password: my_password, 
+                                             act_blue_entity_id: my_id)
                                   
 You can use the campaign object to get data.
   
@@ -45,12 +45,14 @@ You can use the campaign object to get data.
     # returns a hash of all the campaign's contributions. Use with care. 
     campaign.all_contributions
     
-    # returns the contributions in the last 24 hours
+    # returns the contributions in the previous day (24 hours)
     campaign.contributions_in_last_24_hours
     
     # returns contributions in a certain time range. Arguments must be
-    # ISO 8601 formatted strings. 
-    campaign.contributions_in_time_range(start_time, end_time)
+    # ISO 8601 formatted strings. Defaults to the previous 24 hours if no 
+    # arguments are supplied
+    campaign.contributions_in_time_range(start_time: "2014-10-10T14:00:00-07:00", 
+                                         end_time: "2014-10-12T14:00:00-07:00")
     
 The structure of the response from ActBlue is 
 different if there is one contribution, or more than one. In particular, 
